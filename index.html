@@ -3,264 +3,356 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Imports Intelligence | Cotações de importação com IA</title>
-<meta name="description" content="Receba cotações por e-mail, calcule o custo total de importação e compare fornecedores automaticamente. Projeto Interdisciplinar IFPR.">
+<title>Imports Intelligence | Nova geração do Comércio Exterior</title>
+<meta name="description" content="IA que lê cotações, calcula o custo total de importação e entrega ao seu ERP. Versão beta com demo.">
+<meta name="theme-color" content="#0A0F14">
+<meta property="og:title" content="Imports Intelligence · Nova geração do Comércio Exterior">
+<meta property="og:description" content="IA aplicada ao Comex: da cotação ao custo total, integrada ao ERP.">
+<link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#1F2D3A; --slate:#3E566B; --mist:#6C7B88; --line:#DCE3E8; --paper:#F4F7F8; --white:#fff;
-  --mint:#6FD3B3; --mint-soft:#D5F3EA; --mint-deep:#1E7E65;
-  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
-  --body:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
-}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--body);color:var(--ink);background:var(--white);line-height:1.6;font-size:17px}
-a{color:var(--mint-deep)}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.025em}
-h2{font-size:clamp(1.8rem,3.6vw,2.5rem);margin-bottom:14px}
-h3{font-size:1.1rem;letter-spacing:-.01em;margin-bottom:6px}
-section{padding:92px 0}
-.center{text-align:center}
-.sub{max-width:58ch;color:var(--slate);font-size:1.05rem}
-.center .sub{margin:0 auto}
-.paper{background:var(--paper)}
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="assets/css/style.css">
 
-/* nav */
-.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
-.brand{font-family:var(--head);font-weight:700;font-size:1.15rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
-.logo{width:26px;height:26px;border-radius:7px;background:var(--slate);position:relative;flex:none}
-.logo::before{content:"";position:absolute;left:6px;top:6px;width:14px;height:14px;border-radius:3px;background:var(--mint)}
-nav ul{list-style:none;padding:0;display:flex;gap:28px}
-nav a.l{color:var(--slate);text-decoration:none;font-size:.95rem;font-weight:500}
-nav a.l:hover{color:var(--mint-deep)}
-.btn{display:inline-block;padding:12px 22px;border-radius:9px;font-weight:600;text-decoration:none;font-size:.96rem;border:1.5px solid var(--slate);color:var(--slate);background:transparent}
-.btn.main{background:var(--slate);color:#fff}
-.btn.main:hover{background:var(--ink)}
-.btn:not(.main):hover{background:var(--mint-soft)}
-.btn.sm{padding:9px 16px;font-size:.9rem}
-.btn.mint{background:var(--mint);border-color:var(--mint);color:var(--ink)}
-
-/* hero */
-.hero{padding:76px 0 40px;background:linear-gradient(180deg,var(--paper) 0%,var(--white) 100%)}
-.pill{display:inline-flex;gap:8px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:99px;padding:6px 14px 6px 8px;font-size:.88rem;color:var(--slate);margin-bottom:26px}
-.pill b{background:var(--mint-soft);color:var(--mint-deep);border-radius:99px;padding:2px 10px;font-weight:600}
-h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:700;max-width:16ch;margin:0 auto 22px}
-.hero .sub{font-size:1.18rem}
-.cta{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:32px}
-.fine{font-size:.88rem;color:var(--mist);margin-top:16px}
-
-/* app mockup */
-.app{margin:60px auto 0;max-width:960px;background:var(--white);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 60px -30px rgba(31,45,58,.25);overflow:hidden;text-align:left}
-.chrome{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--paper)}
-.chrome i{width:10px;height:10px;border-radius:50%;background:var(--line)}
-.chrome span{margin-left:12px;font-size:.8rem;color:var(--mist)}
-.appbody{display:grid;grid-template-columns:190px 1fr}
-.side{border-right:1px solid var(--line);padding:18px 14px;font-size:.88rem;color:var(--slate);display:grid;gap:4px;align-content:start}
-.side div{padding:8px 10px;border-radius:7px}
-.side .on{background:var(--mint-soft);color:var(--mint-deep);font-weight:600}
-.main{padding:22px;overflow-x:auto}
-.main h3{font-size:1rem}
-.main small{color:var(--mist);display:block;margin-bottom:16px}
-table{border-collapse:collapse;width:100%;min-width:520px;font-size:.9rem}
-th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
-th{font-weight:600;color:var(--mist);font-size:.82rem}
-td:first-child{font-weight:600}
-.chip{display:inline-block;font-size:.76rem;font-weight:600;padding:2px 10px;border-radius:99px;background:var(--line);color:var(--slate)}
-.chip.g{background:var(--mint-soft);color:var(--mint-deep)}
-.chip.w{background:#FFF1D6;color:#8A5A00}
-.bar{display:flex;height:8px;width:120px;border-radius:3px;overflow:hidden;background:var(--line)}
-.bar b{display:block}
-.p{background:var(--slate)}.f{background:#9FB1C0}.t{background:var(--mint)}
-tr.best td{background:#F0FAF6}
-
-/* grids */
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-top:48px}
-.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:26px}
-.card p{color:var(--slate);font-size:.96rem}
-.ico{width:38px;height:38px;border-radius:9px;background:var(--mint-soft);margin-bottom:16px;display:grid;place-items:center}
-.ico svg{width:20px;height:20px;stroke:var(--mint-deep);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.chip.st{margin-left:8px;vertical-align:middle}
-
-/* fluxo */
-.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:52px;position:relative}
-.flow div{padding:0 22px 0 0;position:relative}
-.flow div::before{content:"";position:absolute;top:17px;left:40px;right:8px;height:2px;background:var(--line)}
-.flow div:last-child::before{display:none}
-.flow span{width:36px;height:36px;border-radius:50%;background:var(--white);border:2px solid var(--mint);display:grid;place-items:center;font-family:var(--head);font-weight:700;color:var(--mint-deep);position:relative;z-index:1;margin-bottom:18px}
-.flow p{color:var(--slate);font-size:.95rem}
-
-/* comparação */
-.vs{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:48px}
-.vs .card ul{list-style:none;padding:0;display:grid;gap:12px;margin-top:14px;color:var(--slate);font-size:.96rem}
-.vs li{padding-left:26px;position:relative}
-.vs li::before{content:"";position:absolute;left:0;top:.55em;width:12px;height:2px;background:var(--mist)}
-.vs .new{background:var(--ink);border-color:var(--ink);color:#fff}
-.vs .new h3{color:#fff}
-.vs .new ul{color:#D6E0E7}
-.vs .new li::before{background:var(--mint);height:2px;width:12px}
-
-/* equipe */
-.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;max-width:700px;margin:44px auto 0;text-align:left}
-.person{display:flex;gap:16px;align-items:center}
-.av{width:52px;height:52px;border-radius:50%;background:var(--mint-soft);color:var(--mint-deep);display:grid;place-items:center;font-family:var(--head);font-weight:700;flex:none}
-.person p{font-size:.88rem;color:var(--mist)}
-
-/* faq */
-.faq{max-width:760px;margin:44px auto 0}
-details{border-bottom:1px solid var(--line);padding:18px 0}
-summary{font-family:var(--head);font-weight:500;font-size:1.1rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--mint-deep);font-size:1.4rem;line-height:1}
-details[open] summary::after{content:"–"}
-details p{margin-top:12px;color:var(--slate);font-size:.97rem}
-
-/* faixa final */
-.band{background:var(--ink);color:#fff;border-radius:18px;padding:64px 28px;text-align:center}
-.band h2{color:#fff}
-.band .sub{color:#C5D0D8;margin:0 auto}
-
-/* rodapé */
-footer{border-top:1px solid var(--line);padding:56px 0 40px;font-size:.92rem;color:var(--slate)}
-.fcols{display:grid;grid-template-columns:1.4fr 1fr 1.4fr;gap:40px}
-footer h3{font-size:.95rem;margin-bottom:12px;color:var(--ink)}
-footer ul{list-style:none;padding:0;display:grid;gap:8px}
-footer ol{padding-left:1.1em;display:grid;gap:8px;font-size:.84rem;color:var(--mist)}
-.legal{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-size:.84rem;color:var(--mist)}
-
-@media(max-width:860px){
-  nav ul{display:none}
-  section{padding:64px 0}
-  .appbody{grid-template-columns:1fr}.side{display:none}
-  .flow{grid-template-columns:1fr;gap:28px}.flow div::before{display:none}
-  .vs,.fcols{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style>
 </head>
 <body>
 
-<div class="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-mail" viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="18"/><path d="M3 7l13 11L29 7"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 32 32"><path d="M4 11V4h7M21 4h7v7M28 21v7h-7M11 28H4v-7M4 16h24"/></symbol>
+    <symbol id="i-branch" viewBox="0 0 32 32"><path d="M6 6v20M6 12h10a6 6 0 0 1 6 6v8M6 22h6"/><rect x="3" y="3" width="6" height="6"/><rect x="19" y="23" width="6" height="6"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 32 32"><rect x="6" y="3" width="20" height="26"/><path d="M10 9h12M10 15h4M18 15h4M10 21h4M18 21h4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24"/><path d="M10 16l4 4 8-9"/></symbol>
+    <symbol id="i-file" viewBox="0 0 32 32"><path d="M8 3h12l6 6v20H8z"/><path d="M20 3v6h6M12 16h10M12 21h10"/></symbol>
+    <symbol id="i-sheet" viewBox="0 0 32 32"><rect x="4" y="5" width="24" height="22"/><path d="M4 12h24M4 19h24M12 5v22"/></symbol>
+    <symbol id="i-api" viewBox="0 0 32 32"><path d="M11 8l-7 8 7 8M21 8l7 8-7 8M18 6l-4 20"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 32 32"><path d="M7 24V14a9 9 0 0 1 18 0v10zM4 24h24M13 28h6"/></symbol>
+    <symbol id="i-db" viewBox="0 0 32 32"><ellipse cx="16" cy="8" rx="10" ry="4"/><path d="M6 8v16c0 2.2 4.5 4 10 4s10-1.8 10-4V8M6 16c0 2.2 4.5 4 10 4s10-1.8 10-4"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 32 32"><path d="M3 17V3h14l12 12-14 14z"/><rect x="8" y="8" width="4" height="4"/></symbol>
+    <symbol id="i-map" viewBox="0 0 32 32"><path d="M4 8l8-3 8 3 8-3v19l-8 3-8-3-8 3zM12 5v19M20 8v19"/></symbol>
+    <symbol id="i-ship" viewBox="0 0 32 32"><path d="M3 22l3-8h20l3 8M6 22c3 3 7 3 10 0s7-3 10 0M10 14V7h12v7"/></symbol>
+    <symbol id="i-credit" viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="18"/><path d="M3 13h26M8 20h6"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 32 32"><path d="M16 3L2 28h28zM16 12v8M16 23v2"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 32 32"><path d="M5 27C5 14 12 6 27 5c0 15-8 22-21 22M5 27c4-8 8-12 14-15"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 32 32"><path d="M4 5h24v18H14l-6 5v-5H4z"/><path d="M10 11h12M10 16h8"/></symbol>
+    <symbol id="i-down" viewBox="0 0 32 32"><path d="M4 8l9 9 5-5 10 10M28 15v7h-7"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 32 32"><path d="M4 4v24h24M9 22v-6M15 22V10M21 22v-9M27 22v-4"/></symbol>
+    <symbol id="i-gov" viewBox="0 0 32 32"><path d="M3 12L16 4l13 8zM6 12v12M12 12v12M20 12v12M26 12v12M3 27h26"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 32 32"><path d="M4 9h24M4 16h24M4 23h24"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+<header class="top">
   <div class="wrap nav">
-    <a class="brand" href="#"><span class="logo"></span>Imports Intelligence</a>
+    <a class="brand" href="#">Imports Intelligence</a>
     <nav aria-label="Principal">
-      <ul>
-        <li><a class="l" href="#recursos">Recursos</a></li>
-        <li><a class="l" href="#como-funciona">Como funciona</a></li>
-        <li><a class="l" href="#faq">Perguntas</a></li>
-        <li><a class="l" href="#equipe">Equipe</a></li>
+      <ul class="menu" id="menu">
+        <li><a href="#fluxo">Fluxo</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#erp">ERP</a></li>
+        <li><a href="#reforma">Reforma</a></li>
+        <li><a href="#evidencias">Evidências</a></li>
+        <li><a href="#projeto">Projeto</a></li>
       </ul>
     </nav>
-    <a class="btn main sm" href="#acesso">Acesso antecipado</a>
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
   </div>
-</div>
+</header>
 
-<main>
-<section class="hero center">
+<main id="conteudo">
+
+<section class="hero" aria-labelledby="h-hero">
   <div class="wrap">
-    <span class="pill"><b>Em desenvolvimento</b>Projeto Interdisciplinar IFPR</span>
-    <h1>Cotações de importação no piloto automático.</h1>
-    <p class="sub">A IA lê as propostas dos seus fornecedores, calcula o custo total com tributos e mostra quem realmente sai mais barato. Você só confirma o que importa.</p>
-    <div class="cta">
-      <a class="btn main" href="#acesso">Quero acompanhar</a>
-      <a class="btn" href="#como-funciona">Ver como funciona</a>
+    
+    <h1 id="h-hero" style="margin-top:0">Nova geração do <em>Comércio Exterior.</em> <span class="l2">O futuro chegou.</span></h1>
+    <div class="hero-sub">
+      <p>Inteligência artificial que lê suas cotações, calcula o custo total de importação e entrega tudo ao seu ERP.</p>
+      <div class="cta"><a class="btn main" href="#demo">Ver demo →</a><a class="btn on-dark" href="#acesso">Acesso beta</a></div>
     </div>
-    <p class="fine">Feito para o setor de compras de pequenas e médias importadoras.</p>
 
-    <div class="app" role="img" aria-label="Exemplo ilustrativo da tela de comparativo de cotações">
-      <div class="chrome"><i></i><i></i><i></i><span>Comparativo de cotações · exemplo ilustrativo</span></div>
-      <div class="appbody">
-        <div class="side"><div>Caixa de entrada</div><div class="on">Comparativo</div><div>Fornecedores</div><div>Revisões</div><div>Relatórios</div></div>
-        <div class="main">
-          <h3>Cotação #1042 · Linha de produtos piloto</h3>
-          <small>Valores inventados para ilustrar a ideia</small>
-          <table>
-            <thead><tr><th>Fornecedor</th><th>Preço</th><th>Custo total</th><th>Composição</th><th>Escore</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr class="best"><td>Fornecedor B</td><td>US$ 6.450</td><td>US$ 10.400</td><td><div class="bar"><b class="p" style="width:62%"></b><b class="f" style="width:12%"></b><b class="t" style="width:26%"></b></div></td><td>8,7</td><td><span class="chip g">Recomendado</span></td></tr>
-              <tr><td>Fornecedor A</td><td>US$ 6.190</td><td>US$ 11.900</td><td><div class="bar"><b class="p" style="width:52%"></b><b class="f" style="width:17%"></b><b class="t" style="width:31%"></b></div></td><td>7,9</td><td><span class="chip">Processada</span></td></tr>
-              <tr><td>Fornecedor C</td><td>US$ 6.170</td><td>US$ 12.600</td><td><div class="bar"><b class="p" style="width:49%"></b><b class="f" style="width:21%"></b><b class="t" style="width:30%"></b></div></td><td>6,8</td><td><span class="chip w">Incoterm ausente</span></td></tr>
-            </tbody>
-          </table>
+    <div class="console" role="img" aria-label="Exemplo ilustrativo: três fornecedores comparados por custo total. O Fornecedor B tem o maior preço FOB e o menor custo total.">
+      <div class="cbar"><span>cotacao_1042 · linha piloto</span><span><b>●</b> beta · valores ilustrativos</span></div>
+      <div class="cgrid">
+        <div class="cleft">
+          <div class="crow best"><span class="n">Fornecedor B</span><div class="cbar2"><b class="cp" style="width:60.6%"></b><b class="cf" style="width:8.3%"></b><b class="ct" style="width:31.1%"></b></div><span class="v">US$ 10.642</span></div>
+          <div class="crow"><span class="n">Fornecedor A</span><div class="cbar2"><b class="cp" style="width:52.6%"></b><b class="cf" style="width:16.7%"></b><b class="ct" style="width:30.7%"></b></div><span class="v">US$ 11.767</span></div>
+          <div class="crow"><span class="n">Fornecedor C</span><div class="cbar2"><b class="cp" style="width:50.2%"></b><b class="cf" style="width:19.2%"></b><b class="ct" style="width:30.6%"></b></div><span class="v">US$ 12.294</span></div>
+          <div class="clegend"><span><i class="cp"></i>Produto</span><span><i class="cf"></i>Frete e seguro</span><span><i class="ct"></i>Tributos e despesas</span></div>
+        </div>
+        <div class="cright">
+          <div class="ok"><span>✓</span><span>3 propostas lidas</span></div>
+          <div class="ok"><span>✓</span><span>Custo total calculado</span></div>
+          <div class="wn"><span>!</span><span>Fornecedor C: incoterm ausente</span></div>
+          <div class="wn"><span>!</span><span>Cotação #1039 vence em 3 dias</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="recursos">
-  <div class="wrap center">
-    <h2>Menos digitação. Mais decisão.</h2>
-    <p class="sub">Tudo o que hoje acontece entre o e-mail do fornecedor e a planilha final, em um só fluxo.</p>
-    <div class="grid3" style="text-align:left">
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><h3>Leitura de e-mails<span class="chip st">Planejada</span></h3><p>Monitora a caixa de entrada, extrai dados de planilhas e PDFs e evita processar a mesma cotação duas vezes.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h6"/><circle cx="18" cy="16" r="3"/></svg></div><h3>Triagem inteligente<span class="chip st">Planejada</span></h3><p>Regras de negócio resolvem o que é conhecido. Um modelo de linguagem cuida das exceções, como nomes de produto diferentes.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg></div><h3>Custo total desembarcado<span class="chip st">Planejada</span></h3><p>Calcula automaticamente os tributos de importação e soma o frete, para comparar o custo real e não só o preço de tabela.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg></div><h3>Escore de fornecedores<span class="chip st">Planejada</span></h3><p>Pontua preço, prazo, qualidade percebida e pontualidade, com pesos ajustados à realidade da sua empresa.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></div><h3>Validação humana<span class="chip st">Planejada</span></h3><p>Casos ambíguos vão para uma pessoa conferir antes do registro definitivo. A IA ajuda, mas não decide sozinha.</p></div>
-      <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Indicadores de ganho<span class="chip st">Planejada</span></h3><p>Mede horas economizadas por cotação e a proporção de propostas processadas sem intervenção manual.</p></div>
-    </div>
+<section class="strip" aria-label="Dados de referência">
+  <div class="wrap sg">
+    <div class="stat"><div class="n">9/30</div><p>critérios de fornecedor são críticos</p><small>ALI ET AL., 2023 <sup class="ref"><a href="#ref1">[1]</a></sup></small></div>
+    <div class="stat"><div class="n">&gt;80%</div><p>menos tempo com IA e revisão humana</p><small>JEONG ET AL., 2025 <sup class="ref"><a href="#ref2">[2]</a></sup></small></div>
+    <div class="stat"><div class="n">2027</div><p>CBS substitui PIS/Cofins na importação</p><small>LC 214/2025 <sup class="ref"><a href="#ref4">[4]</a></sup></small></div>
+    <div class="stat"><div class="n">1.059</div><p>ex-tarifários concedidos em fev/2026</p><small>CAMEX/GECEX <sup class="ref"><a href="#ref6">[6]</a></sup></small></div>
   </div>
 </section>
 
-<section id="como-funciona" class="paper">
+<section id="fluxo" aria-labelledby="h-fluxo">
   <div class="wrap">
-    <h2>Como funciona</h2>
-    <p class="sub">Do e-mail do fornecedor à decisão de compra, em quatro passos.</p>
-    <div class="flow">
-      <div><span>1</span><h3>Receber</h3><p>A cotação chega por e-mail, em planilha ou PDF, e é lida automaticamente.</p></div>
-      <div><span>2</span><h3>Classificar</h3><p>Regras e IA padronizam produtos, prazos e condições de entrega.</p></div>
-      <div><span>3</span><h3>Calcular</h3><p>O sistema soma tributos e frete e monta o comparativo por fornecedor.</p></div>
-      <div><span>4</span><h3>Decidir</h3><p>Uma pessoa revisa as exceções e confirma o fornecedor escolhido.</p></div>
+    <div class="sec-head rv"><span class="tag">01 / Fluxo</span><span></span><h2 id="h-fluxo">Do e-mail à decisão, <em>sem digitar.</em></h2></div>
+    <div class="flow rv">
+      <div class="fn"><span class="no">01</span><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><h3>Receber</h3><p>E-mail, PDF e planilha</p></div>
+      <div class="fn"><span class="no">02</span><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg><h3>Ler</h3><p>Extração e padronização</p></div>
+      <div class="fn"><span class="no">03</span><svg class="ic" aria-hidden="true"><use href="#i-branch"/></svg><h3>Decidir</h3><p>Regras e IA nas exceções</p></div>
+      <div class="fn hi"><span class="no">04</span><svg class="ic" aria-hidden="true"><use href="#i-calc"/></svg><h3>Calcular</h3><p>Custo total e escore</p></div>
+      <div class="fn"><span class="no">05</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><h3>Validar</h3><p>Pessoa aprova, ERP recebe</p></div>
     </div>
+    <div class="humans rv"><span>IA</span><i></i><span>Revisão humana antes do registro</span><i></i><span>ERP</span></div>
   </div>
 </section>
 
-<section>
-  <div class="wrap center">
-    <h2>Da planilha manual ao fluxo automatizado</h2>
-    <p class="sub">O problema que o projeto quer resolver, segundo a literatura e a rotina de uma importadora parceira.</p>
-    <div class="vs" style="text-align:left">
-      <div class="card"><h3>Hoje</h3><ul><li>Cotações em e-mails, PDFs e mensagens soltas</li><li>Digitação manual, sujeita a erro de transcrição</li><li>Comparação pelo preço unitário</li><li>Prazos de validade das cotações perdidos</li></ul></div>
-      <div class="card new"><h3>Com Imports Intelligence</h3><ul><li>Entrada única, lida automaticamente</li><li>Dados padronizados e sem duplicidade</li><li>Comparação pelo custo total de importação</li><li>Revisão humana só onde há dúvida</li></ul></div>
-    </div>
-  </div>
-</section>
-
-<section id="equipe" class="paper">
-  <div class="wrap center">
-    <h2>Quem está construindo</h2>
-    <p class="sub">Estudantes de Gestão da Tecnologia da Informação do IFPR, Câmpus Pinhais, em parceria com uma empresa importadora local.</p>
-    <div class="team">
-      <div class="card person"><div class="av" aria-hidden="true">NM</div><div><h3>Nicole Ribeiro de Mello</h3><p>Função: <em>preencher</em></p></div></div>
-      <div class="card person"><div class="av" aria-hidden="true">JL</div><div><h3>João Paulo Carvalho Lima</h3><p>Função: <em>preencher</em></p></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="wrap center">
-    <h2>Perguntas frequentes</h2>
-    <div class="faq" style="text-align:left">
-      <details><summary>O produto já está disponível?</summary><p>Ainda não. Este é um projeto acadêmico em fase de planejamento. Cada recurso mostrado aqui traz o estado atual e será atualizado conforme o desenvolvimento avançar.</p></details>
-      <details><summary>A IA toma a decisão de compra?</summary><p>Não. A IA organiza e sugere, e uma pessoa valida os casos ambíguos antes do registro final.</p></details>
-      <details><summary>Quais tecnologias serão usadas?</summary><p>Servidor Linux (VPS), Docker, n8n para os fluxos, PostgreSQL para os dados e um modelo de linguagem para as exceções. Esta página usa HTML, CSS e GitHub Pages.</p></details>
-      <details><summary>Em que se baseia o projeto?</summary><p>Em três estudos: critérios de seleção de fornecedores (Ali, Nipu e Khan, 2023), automação de ponta a ponta com IA generativa (Jeong et al., 2025) e cálculo do custo total desembarcado (Pumpe e Vallée, 2017).</p></details>
-    </div>
-  </div>
-</section>
-
-<section id="acesso" style="padding-top:0">
+<section id="demo" class="paper" aria-labelledby="h-demo">
   <div class="wrap">
-    <div class="band">
-      <h2>Acompanhe a evolução do projeto</h2>
-      <p class="sub">Código, documentação e novidades ficam no repositório. Volte aqui para ver as demonstrações quando estiverem prontas.</p>
-      <div class="cta"><a class="btn mint" href="https://github.com/elloNicole/ProcurementAIPage">Ver no GitHub</a><a class="btn" style="color:#fff;border-color:#fff" href="#">Baixar projeto inicial (PDF)</a></div>
+    <div class="sec-head rv"><span class="tag">02 / Demo</span><span></span><h2 id="h-demo">O menor preço <em>não é</em> o menor custo.</h2></div>
+    <div class="sim app rv">
+      <div class="sim-bar"><span class="tag">Painel de cotação · dados fictícios</span><button type="button" id="reset">Restaurar</button></div>
+      <div class="kpis" aria-live="polite">
+        <div class="kp1 hl"><div class="lab">Menor custo total</div><div class="v" id="k-best">—</div><div class="s" id="k-best-s"></div></div>
+        <div class="kp1"><div class="lab">Economia vs. escolher pelo FOB</div><div class="v" id="k-save">—</div><div class="s" id="k-save-s"></div></div>
+        <div class="kp1"><div class="lab">Menor preço FOB</div><div class="v" id="k-fob">—</div><div class="s" id="k-fob-s"></div></div>
+      </div>
+      <div class="glob">
+        <div class="field"><label for="g-rate">Tributos de importação (% do valor CIF)</label><input id="g-rate" type="number" inputmode="decimal" min="0" max="200" step="0.5" value="38"></div>
+        <div class="field"><label for="g-fixed">Despesas por embarque (US$)</label><input id="g-fixed" type="number" inputmode="decimal" min="0" step="10" value="520"></div>
+      </div>
+      <div class="tw"><table class="tbl">
+        <caption class="sr">Comparação de fornecedores por custo total</caption>
+        <thead><tr><th scope="col">Fornecedor</th><th scope="col">FOB (US$)</th><th scope="col">Frete (US$)</th><th scope="col">Seguro (US$)</th><th scope="col">CIF</th><th scope="col">Tributos</th><th scope="col">Custo total</th><th scope="col">vs. melhor</th><th scope="col" class="l">Composição</th><th scope="col" class="l">Status</th></tr></thead>
+        <tbody id="tb"></tbody>
+      </table></div>
+      <div class="tbl-foot"><span>3 propostas · cotacao_1042</span><span class="clegend"><span><i class="cp"></i>Produto</span><span><i class="cf"></i>Frete e seguro</span><span><i class="ct"></i>Tributos e despesas</span></span></div>
+      <div class="verdict" id="verdict" role="status"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><span id="verdict-txt"></span></div>
+    </div>
+    <p class="note">Simulação simplificada: alíquota única sobre o valor CIF (preço + frete + seguro). O cálculo oficial é do despachante e do contador.</p>
+  </div>
+</section>
+
+<section id="erp" class="dark" aria-labelledby="h-erp">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="tag">03 / Integração</span><span></span><h2 id="h-erp">Entra antes do ERP. <em>Entrega ao ERP.</em></h2></div>
+    <div class="int rv">
+      <div class="col">
+        <div class="node"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>E-mail</div>
+        <div class="node"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg>PDF</div>
+        <div class="node"><svg class="ic" aria-hidden="true"><use href="#i-sheet"/></svg>Planilha</div>
+      </div>
+      <div class="link" aria-hidden="true"></div>
+      <div class="core">
+        <h3>Imports Intelligence</h3>
+        <div class="row"><span>IDP</span><span>Regras</span><span>IA</span><span>Custo total</span><span>Escore</span></div>
+      </div>
+      <div class="link" aria-hidden="true"></div>
+      <div class="col">
+        <div class="node"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Alertas via WhatsApp</div>
+        <div class="node"><svg class="ic" aria-hidden="true"><use href="#i-down"/></svg>Redução de custos</div>
+        <div class="node"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg>Dashboards avançados</div>
+      </div>
+    </div>
+      <div class="soon rv">
+      <span class="tag">Em breve</span>
+      <div class="sn"><svg class="ic" aria-hidden="true"><use href="#i-gov"/></svg><div><h3>API da Receita Federal</h3><p>Consulta de dados oficiais direto do sistema.</p></div></div>
+      <div class="sn"><svg class="ic" aria-hidden="true"><use href="#i-calc"/></svg><div><h3>Simulação de impostos</h3><p>Tributos da importação calculados por cenário.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="reforma" class="dark" style="padding-top:0" aria-labelledby="h-ref">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="tag">04 / Reforma tributária</span><span></span><h2 id="h-ref">O custo muda até 2033. <em>A conta acompanha.</em></h2></div>
+    <div class="tl rv" role="list" aria-label="Cronograma da transição">
+      <div class="tn" role="listitem"><div class="y">2026</div><p>Alíquotas de teste de CBS e IBS</p></div>
+      <div class="tn" role="listitem"><div class="y">2027</div><p>CBS no lugar do PIS/Cofins-Importação. Começa o Imposto Seletivo</p></div>
+      <div class="tn" role="listitem"><div class="y">2027–28</div><p>IBS em teste</p></div>
+      <div class="tn" role="listitem"><div class="y">2029–32</div><p>ICMS e ISS saem por etapas</p></div>
+      <div class="tn" role="listitem"><div class="y">2033</div><p>Transição concluída</p></div>
+    </div>
+    <div class="tiles rv">
+      <div class="tile"><svg class="ic" aria-hidden="true"><use href="#i-tag"/></svg><h3>Ex-tarifário</h3><p>Imposto de Importação reduzido para bens sem similar nacional.<sup class="ref"><a href="#ref6">[6]</a></sup></p></div>
+      <div class="tile"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg><h3>ICMS por estado e porto</h3><p>Diferimento e crédito presumido, com condições próprias.<sup class="ref"><a href="#ref7">[7]</a><a href="#ref8">[8]</a></sup></p></div>
+      <div class="tile"><svg class="ic" aria-hidden="true"><use href="#i-ship"/></svg><h3>AFRMM</h3><p>Isenção total ou parcial, solicitada à Receita.<sup class="ref"><a href="#ref9">[9]</a></sup></p></div>
+      <div class="tile"><svg class="ic" aria-hidden="true"><use href="#i-credit"/></svg><h3>Crédito de IBS e CBS</h3><p>Crédito integral dos tributos pagos na importação.<sup class="ref"><a href="#ref10">[10]</a></sup></p></div>
+      <div class="tile al"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><h3>Imposto Seletivo</h3><p>Alcança também a importação de bens listados em lei.<sup class="ref"><a href="#ref11">[11]</a></sup></p></div>
+      <div class="tile"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><h3>Critério ambiental</h3><p>Peso opcional no escore. Não é benefício fiscal.<sup class="ref"><a href="#ref12">[12]</a></sup></p></div>
+    </div>
+    <p class="note dk rv">O sistema sinaliza e simula. Enquadramento e cálculo oficial ficam com despachante e contador. Conferido em novembro de 2026; normas podem mudar.</p>
+  </div>
+</section>
+
+<section id="evidencias" class="paper" aria-labelledby="h-ev">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="tag">05 / Evidências</span><span></span><h2 id="h-ev">Base <em>científica.</em></h2></div>
+    <div class="ev rv">
+      <div class="evc"><div class="big">9/30</div><h3>Poucos critérios decidem</h3><p>Qualidade, prazo, preço e informação lideram. Transporte também é crítico.</p><div class="src">ALI, NIPU E KHAN, 2023 <sup class="ref"><a href="#ref1">[1]</a></sup></div></div>
+      <div class="evc"><div class="big">&gt;80%</div><h3>IA com revisão humana</h3><p>Menos tempo de processamento no caso de despesas da Samsung SDS.</p><div class="src">JEONG ET AL., 2025 <sup class="ref"><a href="#ref2">[2]</a></sup></div></div>
+      <div class="evc"><div class="big">4 tipos</div><h3>Custo desembarcado</h3><p>O método de cálculo deve ser proporcional à importância e à complexidade da compra.</p><div class="src">PUMPE E VALLÉE, 2017 <sup class="ref"><a href="#ref3">[3]</a></sup></div></div>
+    </div>
+    <div class="bars rv">
+      <h3>Importância relativa dos nove critérios críticos · Ali, Nipu e Khan (2023)</h3>
+      <div class="br"><span>Qualidade</span><div class="t"><i style="width:100%"></i></div><span>13,58%</span></div>
+      <div class="br"><span>Entrega no prazo</span><div class="t"><i style="width:98.8%"></i></div><span>13,41%</span></div>
+      <div class="br"><span>Preço do material</span><div class="t"><i style="width:94.9%"></i></div><span>12,89%</span></div>
+      <div class="br"><span>Compartilhamento de informação</span><div class="t"><i style="width:88%"></i></div><span>11,95%</span></div>
+      <div class="br"><span>Serviço pós-venda</span><div class="t"><i style="width:87.8%"></i></div><span>11,92%</span></div>
+      <div class="br"><span>Lead time</span><div class="t"><i style="width:70.4%"></i></div><span>9,56%</span></div>
+      <div class="br"><span>Desconto por quantidade</span><div class="t"><i style="width:68%"></i></div><span>9,23%</span></div>
+      <div class="br hl"><span>Saúde e segurança ocupacional</span><div class="t"><i style="width:67.8%"></i></div><span>9,21%</span></div>
+      <div class="br hl"><span>Custo de transporte</span><div class="t"><i style="width:60.8%"></i></div><span>8,25%</span></div>
+    </div>
+    <div class="kp rv" aria-label="Indicadores do piloto, ainda não medidos">
+      <div class="kpi"><div class="v">A medir</div><p>Horas economizadas por cotação</p></div>
+      <div class="kpi"><div class="v">A medir</div><p>Variação do custo de aquisição</p></div>
+      <div class="kpi"><div class="v">A medir</div><p>Cotações sem intervenção manual</p></div>
+      <div class="kpi"><div class="v">A medir</div><p>Casos encaminhados à revisão corretamente</p></div>
+    </div>
+    <p class="note">Resultados dos estudos são dos autores, em contextos próprios. Os indicadores do piloto serão publicados após a medição.</p>
+  </div>
+</section>
+
+<section id="projeto" aria-labelledby="h-proj">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="tag">06 / Projeto</span><span></span><h2 id="h-proj">Sobre o <em>projeto.</em></h2></div>
+
+    <div class="pj rv">
+      <div class="pl"><span class="tag">Apresentação</span></div>
+      <div class="pc">
+        <h3>Imports Intelligence</h3>
+        <p>Sistema que automatiza a gestão de cotações, importações e seleção de fornecedores com inteligência artificial, para pequenas e médias empresas importadoras.</p>
+        <p class="meta">Projeto Interdisciplinar 1 · Curso de Gestão da Tecnologia da Informação · IFPR Câmpus Pinhais · 4º período · 2026.02</p>
+        <div class="links"><a href="https://github.com/elloNicole/ProcurementAIPage">Repositório</a><a href="https://github.com/elloNicole/ProcurementAIPage/tree/main/docs">Documentação</a><a href="#demo">Demonstração</a></div>
+      </div>
+    </div>
+
+    <div class="pj rv">
+      <div class="pl"><span class="tag">Problema</span></div>
+      <div class="pc">
+        <p>Em PMEs importadoras, a cotação internacional costuma ser manual: as propostas chegam por e-mail em formatos diferentes (planilha, PDF, texto) e são digitadas em planilhas. A rotina consome tempo do setor de compras, está sujeita a erros de transcrição e a perda de validade das cotações, e dificulta comparar fornecedores de forma objetiva.</p>
+        <ul class="ul">
+          <li>A escolha de fornecedor é multicritério: qualidade, prazo, preço e informação pesam mais que o preço de tabela.<sup class="ref"><a href="#ref1">[1]</a></sup></li>
+          <li>Empresas tendem a subestimar o custo total desembarcado de uma importação.<sup class="ref"><a href="#ref3">[3]</a></sup></li>
+          <li>Público-alvo: setor de compras de uma PME importadora local, parceira do projeto de extensão.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pj rv">
+      <div class="pl"><span class="tag">Solução</span></div>
+      <div class="pc">
+        <p><b>Objetivo geral:</b> reduzir o tempo e o custo do processo de cotação, padronizando propostas, calculando o custo total por fornecedor e mantendo a validação humana nas decisões de maior impacto.</p>
+        <div class="tw"><table class="ft">
+          <caption class="sr">Funcionalidades e estado atual</caption>
+          <thead><tr><th scope="col">Funcionalidade</th><th scope="col">Estado</th></tr></thead>
+          <tbody>
+            <tr><td>Simulador de custo total (demonstração com dados fictícios)</td><td><span class="st i">Implementada</span></td></tr>
+            <tr><td>Recebimento de cotações por e-mail</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>Extração de dados de PDF e planilha (IDP)</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>Triagem por regras e IA nas exceções</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>Cálculo automático da carga tributária e do custo total</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>Escore comparativo de fornecedores</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>Validação humana antes do registro</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>Entrega ao ERP, alertas via WhatsApp e dashboards</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>API da Receita Federal e simulação de impostos</td><td><span class="st p">Planejada</span></td></tr>
+          </tbody>
+        </table></div>
+        <p class="meta">Limitações conhecidas: a demonstração usa alíquota única e valores fictícios; o cálculo oficial de tributos é do despachante e do contador. Referência de arquitetura: automação em quatro etapas com revisão humana.<sup class="ref"><a href="#ref2">[2]</a></sup></p>
+      </div>
+    </div>
+
+    <div class="pj rv">
+      <div class="pl"><span class="tag">Equipe</span></div>
+      <div class="pc">
+        <div class="team">
+          <div><h3>Nicole Ribeiro de Mello</h3><p>Equipe executora: mapeamento do processo, desenho da automação e validação dos resultados.</p><a href="https://github.com/elloNicole">GitHub</a></div>
+          <div><h3>João Paulo Carvalho Lima</h3><p>Equipe executora: mapeamento do processo, desenho da automação e validação dos resultados.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pj rv">
+      <div class="pl"><span class="tag">Documentação</span></div>
+      <div class="pc">
+        <div class="docs">
+          <a href="https://github.com/elloNicole/ProcurementAIPage/blob/main/docs/requisitos.md"><b>Requisitos</b><span>Escopo, requisitos, histórias de usuário e critérios de aceitação</span></a>
+          <a href="https://github.com/elloNicole/ProcurementAIPage/blob/main/docs/arquitetura.md"><b>Arquitetura</b><span>Fluxo, componentes, modelo de dados e decisões técnicas</span></a>
+          <a href="https://github.com/elloNicole/ProcurementAIPage/blob/main/docs/instalacao.md"><b>Instalação e execução</b><span>Como abrir o site e a demo; pré-requisitos do sistema</span></a>
+          <a href="https://github.com/elloNicole/ProcurementAIPage/blob/main/docs/cronograma.md"><b>Gestão e evolução</b><span>Etapas, decisões, limitações e melhorias planejadas</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pj rv">
+      <div class="pl"><span class="tag">Tecnologias</span></div>
+      <div class="pc">
+        <div class="tw"><table class="ft">
+          <caption class="sr">Tecnologias do projeto</caption>
+          <thead><tr><th scope="col">Tecnologia</th><th scope="col">Finalidade</th><th scope="col">Estado</th></tr></thead>
+          <tbody>
+            <tr><td>HTML, CSS e JavaScript</td><td>Página do projeto e simulador de demonstração</td><td><span class="st i">Em uso</span></td></tr>
+            <tr><td>Git e GitHub Pages</td><td>Versionamento e publicação do site</td><td><span class="st i">Em uso</span></td></tr>
+            <tr><td>Servidor Linux (VPS) e Docker</td><td>Infraestrutura auto-hospedada do sistema</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>n8n</td><td>Orquestração dos fluxos de automação</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>PostgreSQL</td><td>Persistência dos dados de cotações e fornecedores</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>Modelo de linguagem</td><td>Tratamento de exceções na triagem</td><td><span class="st p">Planejada</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="pj rv">
+      <div class="pl"><span class="tag">Evolução</span></div>
+      <div class="pc">
+        <ol class="steps">
+          <li><b>1. Mapeamento do processo atual</b><span>Levantamento com a empresa parceira: volume, tempo de triagem e critérios de escolha. Define a linha de base.</span></li>
+          <li><b>2. Prototipagem da automação</b><span>Infraestrutura, recebimento de e-mail, extração, triagem, custo total e escore para uma linha de produtos.</span></li>
+          <li><b>3. Treinamento da equipe da empresa</b><span>Capacitação para operar o sistema e atuar nas validações humanas.</span></li>
+          <li><b>4. Medição de resultados</b><span>Comparação com a linha de base: horas economizadas, custo de aquisição e qualidade da automação.</span></li>
+        </ol>
+        <p class="meta">Resultados: ainda não medidos. Os indicadores serão publicados após a operação assistida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="acesso" class="dark" aria-labelledby="h-acc">
+  <div class="wrap">
+    <div class="two rv">
+      <div>
+        <span class="tag" style="color:var(--acc)">07 / Acesso beta</span>
+        <h2 id="h-acc" style="margin-top:14px">Entre na <em>lista beta.</em></h2>
+        <p class="lead">Conte como suas cotações chegam hoje. Retornamos com um diagnóstico.</p>
+        <div id="faq">
+          <details><summary>Já está disponível?</summary><p>Versão beta com demo. O piloto roda com uma importadora parceira, e os resultados serão publicados após a medição.</p></details>
+          <details><summary>Substitui o ERP ou o despachante?</summary><p>Não. Atua antes: da cotação à decisão de compra, e entrega os dados ao ERP.</p></details>
+          <details><summary>A IA decide a compra?</summary><p>Não. Regras resolvem o parametrizado, a IA trata exceções e uma pessoa valida antes do registro.</p></details>
+          <details><summary>Onde ficam os dados?</summary><p>Em servidor Linux auto-hospedado, com Docker, n8n e PostgreSQL.</p></details>
+        </div>
+      </div>
+      <form class="form" id="form" novalidate>
+        <div class="f2">
+          <div class="field"><label for="f-nome">Nome</label><input id="f-nome" name="nome" autocomplete="name" required></div>
+          <div class="field"><label for="f-emp">Empresa</label><input id="f-emp" name="empresa" autocomplete="organization" required></div>
+        </div>
+        <div class="field"><label for="f-mail">E-mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-vol">Cotações por mês</label><select id="f-vol" name="volume"><option>Até 20</option><option>21 a 50</option><option>51 a 150</option><option>Mais de 150</option></select></div>
+        <div class="field"><label for="f-msg">Como compara fornecedores hoje? (opcional)</label><textarea id="f-msg" name="mensagem" rows="3"></textarea></div>
+        <button class="btn main" type="submit">Solicitar acesso →</button>
+        <p class="status" id="f-status" role="status"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -268,18 +360,39 @@ footer ol{padding-left:1.1em;display:grid;gap:8px;font-size:.84rem;color:var(--m
 
 <footer>
   <div class="wrap">
-    <div class="fcols">
-      <div><a class="brand" href="#"><span class="logo"></span>Imports Intelligence</a><p style="margin-top:12px;max-width:34ch">Sistema automatizado para gestão de cotações, importações e seleção de fornecedores via IA.</p></div>
-      <div><h3>Projeto</h3><ul><li><a href="#recursos">Recursos</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#equipe">Equipe</a></li><li><a href="https://github.com/elloNicole/ProcurementAIPage">Repositório</a></li></ul></div>
-      <div><h3>Referências</h3><ol>
-        <li>Ali, Nipu e Khan (2023). <a href="https://doi.org/10.1016/j.dajour.2023.100238">Decision Analytics Journal, v. 7</a>.</li>
-        <li>Jeong et al. (2025). <a href="https://arxiv.org/abs/2505.20733">E2E process automation leveraging generative AI</a>.</li>
-        <li>Pumpe e Vallée (2017). <a href="https://doi.org/10.1016/j.trpro.2017.05.462">Transportation Research Procedia, v. 25</a>.</li>
-      </ol></div>
+    <div class="fc">
+      <div>
+        <a class="brand" href="#">Imports Intelligence</a>
+        <p style="margin-top:14px;max-width:40ch">IA para o Comércio Exterior: cotações, custo total e seleção de fornecedores, integrados ao ERP.</p>
+      </div>
+      <ul><li><a href="#fluxo">Fluxo</a></li><li><a href="#demo">Demo</a></li><li><a href="#projeto">Sobre o projeto</a></li><li><a href="#reforma">Reforma tributária</a></li><li><a href="https://github.com/elloNicole/ProcurementAIPage">GitHub</a></li></ul>
     </div>
-    <p class="legal">Projeto Interdisciplinar 1 · Gestão da Tecnologia da Informação · Instituto Federal do Paraná, Câmpus Pinhais · 2026.02. Os valores mostrados na tela de exemplo são fictícios.</p>
+    <div class="refs">
+      <h3>Referências</h3>
+      <ol>
+        <li id="ref1">Ali, Nipu e Khan (2023). <a href="https://doi.org/10.1016/j.dajour.2023.100238">Decision Analytics Journal, v. 7</a>.</li>
+        <li id="ref2">Jeong et al. (2025). <a href="https://arxiv.org/abs/2505.20733">E2E process automation leveraging generative AI and IDP-based automation agent</a>.</li>
+        <li id="ref3">Pumpe e Vallée (2017). <a href="https://doi.org/10.1016/j.trpro.2017.05.462">Transportation Research Procedia, v. 25</a>.</li>
+        <li id="ref4">Transição e incidência na importação (LC 214/2025): <a href="https://www.barbieriadvogados.com/en/transicao-tributaria-2026/">Barbieri</a>; <a href="https://taxup.com.br/solucoes/direito-aduaneiro/ibs-cbs-importacao/">TaxUp</a>.</li>
+        <li id="ref5">Duimp e Catálogo de Produtos: <a href="https://www.dhl.com/discover/pt-br/conselhos-de-logistica/orientacao-de-exportacao-e-importacao/siscomex-importacao">DHL</a>.</li>
+        <li id="ref6">Ex-tarifários: <a href="https://www.jb.com.br/economia/2026/02/1058658-camex-zera-tarifa-de-importacao-para-mais-de-1-mil-produtos.html">Jornal do Brasil</a>; <a href="https://teletime.com.br/23/10/2025/governo-cria-novos-procedimentos-para-pleitos-de-ex-tarifario/">Teletime</a>.</li>
+        <li id="ref7">Regimes de ICMS: <a href="https://guelcos.com.br/conteudo/importacao/o-que-e-icms-diferido-e-como-gerar-folego-financeiro-nas-importacoes">Guelcos</a>.</li>
+        <li id="ref8">Benefício e porto em SC: <a href="https://www.coad.com.br/home/noticias-detalhe/86100/empresa-perde-beneficios-tarifarios-por-usar-portos-fora-de-santa-catarina">COAD</a>.</li>
+        <li id="ref9">AFRMM: <a href="https://www.gov.br/pt-br/servicos/obter-isencao-do-adicional-ao-frete-para-renovacao-da-marinha-mercante">gov.br</a>.</li>
+        <li id="ref10">Crédito na importação: <a href="https://planning.com.br/importacao-reforma-tributaria-ibs-cbs/">Planning</a>.</li>
+        <li id="ref11">Imposto Seletivo: <a href="https://valorfinal.com.br/guia/imposto-seletivo">Valor Final</a>.</li>
+        <li id="ref12">Mercado de carbono (Lei 15.042/2024): <a href="https://www.gov.br/fazenda/pt-br/composicao/orgaos/mercado-de-carbono/sobre/sistema-brasileiro-de-comercio-de-emissoes">Min. da Fazenda</a>.</li>
+      </ol>
+    </div>
+    <div class="legal">
+      <span>© 2026 Imports Intelligence · Desenvolvido por Nicole Ribeiro de Mello e João Paulo Carvalho Lima, IFPR Câmpus Pinhais, com importadora parceira.</span>
+      <span>Fontes Instrument Serif, Geist e Geist Mono (SIL Open Font License), via Google Fonts. Ícones e ilustrações próprios.</span>
+      <span>Versão beta. Valores da demo são fictícios. Conteúdo tributário informativo; não substitui despachante ou contador.</span>
+    </div>
   </div>
 </footer>
+
+<script src="assets/js/main.js" defer></script>
 
 </body>
 </html>
