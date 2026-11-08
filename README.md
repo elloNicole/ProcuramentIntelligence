@@ -17,7 +17,7 @@ Em PMEs importadoras, a cotação internacional costuma ser manual: propostas ch
 | Funcionalidade | Estado |
 |---|---|
 | Simulador de custo total (demonstração, dados fictícios) | Implementada |
-| Recebimento de cotações por e-mail | Planejada |
+| Recebimento de cotações por e-mail | Implementada |
 | Extração de PDF e planilha (IDP) | Planejada |
 | Triagem por regras e IA nas exceções | Planejada |
 | Cálculo da carga tributária e do custo total | Planejada |
