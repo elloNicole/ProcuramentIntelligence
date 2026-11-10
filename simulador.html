@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador de custos e impostos | Imports Intelligence</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-grid" viewBox="0 0 32 32"><rect x="4" y="4" width="10" height="10"/><rect x="18" y="4" width="10" height="10"/><rect x="4" y="18" width="10" height="10"/><rect x="18" y="18" width="10" height="10"/></symbol>
+<symbol id="i-doc" viewBox="0 0 32 32"><path d="M8 3h12l6 6v20H8z"/><path d="M20 3v6h6M12 16h10M12 21h10"/></symbol>
+<symbol id="i-users" viewBox="0 0 32 32"><circle cx="12" cy="11" r="5"/><path d="M3 28c0-5 4-8 9-8s9 3 9 8M22 6a5 5 0 0 1 0 10M25 21c3 1 4 4 4 7"/></symbol>
+<symbol id="i-box" viewBox="0 0 32 32"><path d="M4 9l12-5 12 5v14l-12 5-12-5zM4 9l12 5 12-5M16 14v14"/></symbol>
+<symbol id="i-calc" viewBox="0 0 32 32"><rect x="6" y="3" width="20" height="26"/><path d="M10 9h12M10 15h4M18 15h4M10 21h4M18 21h4"/></symbol>
+</defs></svg>
+<a class="skip" href="#view">Ir para o conteúdo</a>
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div class="main">
+    <header class="appbar">
+      <span class="note"><b>Protótipo com dados fictícios.</b> Alíquotas ilustrativas e editáveis; o cálculo oficial é do despachante e do contador.</span>
+      <a class="btn sm ghost" href="prototipo.html#/painel">Ir ao painel</a>
+    </header>
+    <main id="view" class="page" tabindex="-1"></main>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/simulador.js"></script>
+</body>
+</html>

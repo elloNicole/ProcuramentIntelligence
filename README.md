@@ -6,7 +6,7 @@ Sistema para automatizar a gestão de cotações, importações e seleção de f
 
 **Equipe:** Nicole Ribeiro de Mello e João Paulo Carvalho Lima
 
-> Versão beta. O repositório contém hoje a página do projeto e um simulador de demonstração com **dados fictícios**. O sistema de automação ainda está em planejamento.
+> Versão beta. Já estão implementados o recebimento de cotações por e-mail, um protótipo navegável e um simulador de custos, estes dois com **dados fictícios**. As demais etapas da automação estão planejadas.
 
 ## Problema
 
@@ -17,6 +17,8 @@ Em PMEs importadoras, a cotação internacional costuma ser manual: propostas ch
 | Funcionalidade | Estado |
 |---|---|
 | Simulador de custo total (demonstração, dados fictícios) | Implementada |
+| Protótipo navegável (painel, pedidos, revisão humana) | Implementada |
+| Simulador de custos e impostos (alíquotas ilustrativas) | Implementada |
 | Recebimento de cotações por e-mail | Implementada |
 | Extração de PDF e planilha (IDP) | Planejada |
 | Triagem por regras e IA nas exceções | Planejada |
@@ -31,18 +33,26 @@ Em PMEs importadoras, a cotação internacional costuma ser manual: propostas ch
 ```
 .
 ├── index.html          página do projeto (GitHub Pages)
+├── prototipo.html      protótipo navegável: painel, pedidos, revisão humana
+├── simulador.html      simulador de custos e impostos
 ├── assets/
-│   ├── css/style.css
-│   ├── js/main.js
+│   ├── css/            style.css (site) e app.css (protótipo e simulador)
+│   ├── js/             main.js, common.js, app.js, simulador.js
 │   └── imagens/
 ├── docs/
 │   ├── requisitos.md
-│   ├── arquitetura.md
+│   ├── arquitetura.md   inclui o diagrama entidade-relacionamento
+│   ├── funcionalidades.md
 │   ├── instalacao.md
 │   └── cronograma.md
 ├── README.md
 └── LICENSE
 ```
+
+## Protótipo e simulador
+
+- `prototipo.html`: painel de compras, status das cotações por fornecedor, bases de fornecedores e materiais (com NCM e urgência), pedido com cotações e revisão humana até o fechamento. O estado fica só na memória do navegador; ao atualizar a página, volta ao início.
+- `simulador.html`: custo nacionalizado e custo efetivo, com memória de cálculo, créditos por regime, ex-tarifário, isenção de AFRMM, ICMS diferido, cenário 2027 e comparativo de portos. Alíquotas ilustrativas e editáveis.
 
 ## Como ver o site
 
@@ -51,7 +61,8 @@ Abra o `index.html` no navegador ou rode `python3 -m http.server` na pasta e ace
 ## Documentação
 
 - [Requisitos](docs/requisitos.md)
-- [Arquitetura](docs/arquitetura.md)
+- [Arquitetura e modelo de dados](docs/arquitetura.md)
+- [Funcionalidades](docs/funcionalidades.md)
 - [Instalação e execução](docs/instalacao.md)
 - [Gestão e evolução](docs/cronograma.md)
 

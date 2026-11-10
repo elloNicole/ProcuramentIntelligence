@@ -52,7 +52,8 @@
     <nav aria-label="Principal">
       <ul class="menu" id="menu">
         <li><a href="#fluxo">Fluxo</a></li>
-        <li><a href="#demo">Demo</a></li>
+        <li><a href="prototipo.html">Protótipo</a></li>
+        <li><a href="simulador.html">Simulador</a></li>
         <li><a href="#erp">ERP</a></li>
         <li><a href="#reforma">Reforma</a></li>
         <li><a href="#evidencias">Evidências</a></li>
@@ -71,7 +72,7 @@
     <h1 id="h-hero" style="margin-top:0">Nova geração do <em>Comércio Exterior.</em> <span class="l2">O futuro chegou.</span></h1>
     <div class="hero-sub">
       <p>Inteligência artificial que lê suas cotações, calcula o custo total de importação e entrega tudo ao seu ERP.</p>
-      <div class="cta"><a class="btn main" href="#demo">Ver demo →</a><a class="btn on-dark" href="#acesso">Acesso beta</a></div>
+      <div class="cta"><a class="btn main" href="prototipo.html">Ver protótipo →</a><a class="btn on-dark" href="#acesso">Acesso beta</a></div>
     </div>
 
     <div class="console" role="img" aria-label="Exemplo ilustrativo: três fornecedores comparados por custo total. O Fornecedor B tem o maior preço FOB e o menor custo total.">
@@ -140,6 +141,7 @@
       <div class="verdict" id="verdict" role="status"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><span id="verdict-txt"></span></div>
     </div>
     <p class="note">Simulação simplificada: alíquota única sobre o valor CIF (preço + frete + seguro). O cálculo oficial é do despachante e do contador.</p>
+    <p class="note" style="margin-top:12px"><a href="prototipo.html" style="font-weight:600">Abrir o protótipo completo →</a> &nbsp; <a href="simulador.html" style="font-weight:600">Abrir o simulador de custos e impostos →</a></p>
   </div>
 </section>
 
@@ -167,7 +169,7 @@
       <div class="soon rv">
       <span class="tag">Em breve</span>
       <div class="sn"><svg class="ic" aria-hidden="true"><use href="#i-gov"/></svg><div><h3>API da Receita Federal</h3><p>Consulta de dados oficiais direto do sistema.</p></div></div>
-      <div class="sn"><svg class="ic" aria-hidden="true"><use href="#i-calc"/></svg><div><h3>Simulação de impostos</h3><p>Tributos da importação calculados por cenário.</p></div></div>
+      <div class="sn"><svg class="ic" aria-hidden="true"><use href="#i-calc"/></svg><div><h3>Alíquotas ao vivo</h3><p>Integração com o Siscomex para atualizar as alíquotas. A simulação já existe no <a href="simulador.html" style="border-bottom:1px solid var(--acc)">protótipo</a>.</p></div></div>
     </div>
   </div>
 </section>
@@ -234,7 +236,7 @@
         <h3>Imports Intelligence</h3>
         <p>Sistema que automatiza a gestão de cotações, importações e seleção de fornecedores com inteligência artificial, para pequenas e médias empresas importadoras.</p>
         <p class="meta">Projeto Interdisciplinar 1 · Curso de Gestão da Tecnologia da Informação · IFPR Câmpus Pinhais · 4º período · 2026.02</p>
-        <div class="links"><a href="https://github.com/elloNicole/ProcuramentIntelligence">Repositório</a><a href="https://github.com/elloNicole/ProcuramentIntelligence/tree/main/docs">Documentação</a><a href="#demo">Demonstração</a></div>
+        <div class="links"><a href="https://github.com/elloNicole/ProcuramentIntelligence">Repositório</a><a href="https://github.com/elloNicole/ProcuramentIntelligence/tree/main/docs">Documentação</a><a href="prototipo.html">Demonstração</a></div>
       </div>
     </div>
 
@@ -258,6 +260,7 @@
           <caption class="sr">Funcionalidades e estado atual</caption>
           <thead><tr><th scope="col">Funcionalidade</th><th scope="col">Estado</th></tr></thead>
           <tbody>
+            <tr><td>Protótipo navegável: painel, pedidos, fornecedores, materiais e revisão humana (dados fictícios)</td><td><span class="st i">Implementada</span></td></tr>
             <tr><td>Simulador de custo total (demonstração com dados fictícios)</td><td><span class="st i">Implementada</span></td></tr>
             <tr><td>Recebimento de cotações por e-mail</td><td><span class="st i">Implementada</span></td></tr>
             <tr><td>Extração de dados de PDF e planilha (IDP)</td><td><span class="st p">Planejada</span></td></tr>
@@ -266,7 +269,8 @@
             <tr><td>Escore comparativo de fornecedores</td><td><span class="st p">Planejada</span></td></tr>
             <tr><td>Validação humana antes do registro</td><td><span class="st p">Planejada</span></td></tr>
             <tr><td>Entrega ao ERP, alertas via WhatsApp e dashboards</td><td><span class="st p">Planejada</span></td></tr>
-            <tr><td>API da Receita Federal e simulação de impostos</td><td><span class="st p">Planejada</span></td></tr>
+            <tr><td>Simulador de custos e impostos (protótipo, alíquotas ilustrativas)</td><td><span class="st i">Implementada</span></td></tr>
+            <tr><td>API da Receita Federal e alíquotas ao vivo</td><td><span class="st p">Planejada</span></td></tr>
           </tbody>
         </table></div>
         <p class="meta">Limitações conhecidas: a demonstração usa alíquota única e valores fictícios; o cálculo oficial de tributos é do despachante e do contador. Referência de arquitetura: automação em quatro etapas com revisão humana.<sup class="ref"><a href="#ref2">[2]</a></sup></p>
@@ -290,6 +294,8 @@
           <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/requisitos.md"><b>Requisitos</b><span>Escopo, requisitos, histórias de usuário e critérios de aceitação</span></a>
           <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/arquitetura.md"><b>Arquitetura</b><span>Fluxo, componentes, modelo de dados e decisões técnicas</span></a>
           <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/instalacao.md"><b>Instalação e execução</b><span>Como abrir o site e a demo; pré-requisitos do sistema</span></a>
+          <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/funcionalidades.md"><b>Funcionalidades</b><span>Processos do sistema em detalhe: entradas, regras, saídas e estado</span></a>
+          <a href="prototipo.html"><b>Protótipo navegável</b><span>Painel, pedido com cotações e revisão humana</span></a>
           <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/cronograma.md"><b>Gestão e evolução</b><span>Etapas, decisões, limitações e melhorias planejadas</span></a>
         </div>
       </div>
@@ -365,7 +371,7 @@
         <a class="brand" href="#">Imports Intelligence</a>
         <p style="margin-top:14px;max-width:40ch">IA para o Comércio Exterior: cotações, custo total e seleção de fornecedores, integrados ao ERP.</p>
       </div>
-      <ul><li><a href="#fluxo">Fluxo</a></li><li><a href="#demo">Demo</a></li><li><a href="#projeto">Sobre o projeto</a></li><li><a href="#reforma">Reforma tributária</a></li><li><a href="https://github.com/elloNicole/ProcuramentIntelligence">GitHub</a></li></ul>
+      <ul><li><a href="#fluxo">Fluxo</a></li><li><a href="prototipo.html">Protótipo</a></li><li><a href="simulador.html">Simulador</a></li><li><a href="#projeto">Sobre o projeto</a></li><li><a href="#reforma">Reforma tributária</a></li><li><a href="https://github.com/elloNicole/ProcuramentIntelligence">GitHub</a></li></ul>
     </div>
     <div class="refs">
       <h3>Referências</h3>

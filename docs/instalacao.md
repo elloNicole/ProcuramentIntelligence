@@ -13,6 +13,8 @@ python3 -m http.server 8000
 # acesse http://localhost:8000
 ```
 
+O protótipo (`prototipo.html`) e o simulador (`simulador.html`) abrem do mesmo jeito. O protótipo não grava nada: ao atualizar a página, o estado inicial volta.
+
 As fontes vêm do Google Fonts e exigem internet; sem conexão, o navegador usa fontes padrão.
 
 ## Publicação no GitHub Pages
@@ -28,10 +30,10 @@ No arquivo `assets/js/main.js`, preencha a constante `CONTACT_EMAIL` com o e-mai
 
 ## Sistema de automação (planejado)
 
-Ainda não há código executável. Quando existir, o ambiente previsto é:
+O recebimento de cotações por e-mail já está implementado, mas as instruções de instalação do sistema ainda não foram documentadas. O ambiente previsto é:
 
 - servidor Linux com Docker e Docker Compose;
 - n8n e PostgreSQL em contêineres;
 - variáveis de ambiente em arquivo `.env` **fora do repositório** (por exemplo `DB_PASSWORD`, `EMAIL_USER`, `LLM_API_KEY`), com um `.env.example` sem valores reais.
 
-Esta página será atualizada com comandos de instalação e testes quando houver uma versão executável.
+Esta página será atualizada com comandos de instalação e testes quando a documentação do sistema estiver completa.

@@ -1,6 +1,6 @@
 # Requisitos
 
-Estado: **planejamento**. Apenas o simulador de demonstração (RF09) está implementado.
+Estado: **em desenvolvimento**. Estão implementados o recebimento de cotações por e-mail (RF01) e o simulador de demonstração (RF09).
 
 ## Visão geral e escopo
 
@@ -12,7 +12,7 @@ Automatizar, para uma linha de produtos piloto de uma PME importadora parceira, 
 
 | ID | Requisito | Estado |
 |---|---|---|
-| RF01 | Monitorar uma caixa de e-mail e registrar cada cotação recebida, evitando processamento duplicado | Planejada |
+| RF01 | Monitorar uma caixa de e-mail e registrar cada cotação recebida, evitando processamento duplicado | Implementada |
 | RF02 | Extrair itens, preços, prazos e condições de anexos em PDF e planilha | Planejada |
 | RF03 | Aplicar regras de negócio a itens já parametrizados | Planejada |
 | RF04 | Tratar com modelo de linguagem os casos fora das regras (nomenclatura divergente, incoterm ausente) e encaminhá-los à revisão | Planejada |
@@ -21,7 +21,10 @@ Automatizar, para uma linha de produtos piloto de uma PME importadora parceira, 
 | RF07 | Exigir validação de um responsável antes do registro definitivo | Planejada |
 | RF08 | Entregar os dados validados ao ERP e emitir alertas (inclusive via WhatsApp) | Planejada |
 | RF09 | Simular o custo total de três propostas com dados informados pelo usuário | Implementada (demonstração) |
-| RF10 | Consultar a API da Receita Federal e simular impostos por cenário | Planejada |
+| RF10 | Consultar a API da Receita Federal e alíquotas ao vivo | Planejada |
+| RF12 | Navegar por painel, pedidos, fornecedores e materiais, com urgência por material | Implementada (protótipo) |
+| RF13 | Simular impostos e custo efetivo por cenário, regime e porto | Implementada (protótipo, alíquotas ilustrativas) |
+| RF14 | Revisar o pedido, justificar escolha diferente da sugerida e fechar | Implementada (protótipo) |
 | RF11 | Exibir dashboards de custos e desempenho de fornecedores | Planejada |
 
 ## Requisitos não funcionais

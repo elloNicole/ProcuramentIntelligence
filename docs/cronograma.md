@@ -9,7 +9,7 @@
 | 3. Treinamento da equipe da empresa | Capacitar para operar o sistema e atuar nas validações humanas | Planejada |
 | 4. Medição de resultados | Comparar com a linha de base: horas economizadas, variação do custo de aquisição, cotações sem intervenção manual e encaminhamentos corretos à revisão | Planejada |
 
-> Ajuste os estados acima conforme o andamento real do trabalho. Hoje o que está pronto é a página do projeto e o simulador de demonstração.
+> Ajuste os estados acima conforme o andamento real do trabalho. Hoje estão prontos o recebimento de cotações por e-mail, a página do projeto e o simulador de demonstração.
 
 ## Registro de decisões
 
