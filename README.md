@@ -33,12 +33,13 @@ Em PMEs importadoras, a cotação internacional costuma ser manual: propostas ch
 ```
 .
 ├── index.html          página do projeto (GitHub Pages)
-├── prototipo.html      protótipo navegável: painel, pedidos, revisão humana
+├── prototipo-simples.html  protótipo guiado em quatro passos, com dois cenários (aberto pelo menu)
+├── prototipo.html      protótipo completo: painel, pedidos, revisão humana
 ├── simulador.html      simulador de custos e impostos
 ├── assets/
 │   ├── css/            style.css (site) e app.css (protótipo e simulador)
 │   ├── js/             main.js, common.js, app.js, simulador.js
-│   └── imagens/
+│   └── imagens/        favicon e diagramas (casos de uso e relacionamento)
 ├── docs/
 │   ├── requisitos.md
 │   ├── arquitetura.md   inclui o diagrama entidade-relacionamento
@@ -51,6 +52,7 @@ Em PMEs importadoras, a cotação internacional costuma ser manual: propostas ch
 
 ## Protótipo e simulador
 
+- `prototipo-simples.html`: protótipo guiado em quatro passos (pedido, cotações, comparação e aprovação), com dois cenários: fluxo padrão e com intervenção humana. É o que o menu do site abre.
 - `prototipo.html`: painel de compras, status das cotações por fornecedor, bases de fornecedores e materiais (com NCM e urgência), pedido com cotações e revisão humana até o fechamento. O estado fica só na memória do navegador; ao atualizar a página, volta ao início.
 - `simulador.html`: custo nacionalizado e custo efetivo, com memória de cálculo, créditos por regime, ex-tarifário, isenção de AFRMM, ICMS diferido, cenário 2027 e comparativo de portos. Alíquotas ilustrativas e editáveis.
 

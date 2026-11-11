@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protótipo simples | Imports Intelligence</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0A0F14;--bone:#F3F1EC;--white:#FBFAF7;--line:#D6D3CA;--mut:#55636E;--dmut:#8CA0AD;--acc:#F2DE8C;--bad:#B4481F}
+*{box-sizing:border-box;margin:0;border-radius:0}
+body{font-family:"Geist","Helvetica Neue",Arial,sans-serif;background:var(--bone);color:var(--ink);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.bar{background:var(--ink);color:#fff;padding:12px 24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.bar span{font-size:.8rem;color:var(--dmut);margin-left:8px}
+.bar a{font-size:.8rem;color:var(--acc);text-decoration:none;border-bottom:1px solid var(--acc);margin-left:14px}
+.wrap{max-width:1000px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:1.7rem;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.lead{color:var(--mut);margin:6px 0 20px;max-width:62ch}
+.sc{display:flex;margin-bottom:16px;flex-wrap:wrap}
+.sc button{font:inherit;font-size:.85rem;padding:9px 14px;border:1px solid var(--ink);background:#fff;margin-right:-1px;cursor:pointer;color:var(--ink)}
+.sc button[aria-pressed=true]{background:var(--ink);color:var(--acc)}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--ink);background:#fff;margin-bottom:20px}
+.steps button{font:inherit;text-align:left;width:100%;border:0;border-right:1px solid var(--line);background:#fff;padding:12px 14px;cursor:pointer;color:var(--ink)}
+.steps li:last-child button{border-right:0}
+.steps small{display:block;font-size:.66rem;letter-spacing:.1em;color:var(--mut)}
+.steps b{font-weight:600}
+.steps .dn{background:var(--bone)}
+.steps .cur{background:var(--ink);color:#fff}
+.steps .cur small{color:var(--acc)}
+.pn{background:#fff;border:1px solid var(--ink);margin-bottom:16px}
+.pn>h2{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:12px 18px;border-bottom:1px solid var(--ink);background:var(--white)}
+.bd{padding:18px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border:1px solid var(--line)}
+.kv div{padding:12px 14px;border-right:1px solid var(--line)}
+.kv small{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.hint{font-size:.82rem;color:var(--mut);margin-top:12px}
+.pad{padding:0 18px 16px}
+.tw{overflow-x:auto}
+.t{width:100%;border-collapse:collapse;font-size:.88rem}
+.t th{text-align:left;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);font-weight:500;padding:10px 14px;border-bottom:1px solid var(--ink);background:var(--bone);white-space:nowrap}
+.t td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.t tr:last-child td{border-bottom:0}
+.t .r{text-align:right;font-variant-numeric:tabular-nums}
+.t tr.win td{background:#FBF4D2}
+.t tr.win td:first-child{box-shadow:inset 4px 0 0 var(--ink)}
+.sub{display:block;font-size:.76rem;color:var(--mut);margin-top:2px}
+.bad{color:var(--bad)}
+.ch{display:inline-block;font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border:1px solid currentColor;font-weight:600;white-space:nowrap}
+.ch.ok{background:var(--ink);border-color:var(--ink);color:var(--acc)}
+.ch.warn{background:var(--acc);border-color:var(--acc);color:var(--ink)}
+.ch.wait{color:var(--mut);font-weight:500}
+.cb{display:flex;height:10px;background:var(--line);min-width:110px;margin-top:6px}
+.cb i{display:block;height:100%}
+.leg{display:flex;gap:16px;flex-wrap:wrap;font-size:.74rem;color:var(--mut);padding:10px 18px;border-top:1px solid var(--line);background:var(--white)}
+.leg i{display:inline-block;width:10px;height:10px;margin-right:6px}
+.verdict,.okb{background:var(--acc);border:1px solid var(--ink);padding:16px 18px;margin-bottom:16px}
+.verdict span{display:block;font-size:.84rem;margin-top:6px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 18px;border-bottom:1px solid var(--line);cursor:pointer}
+.opt.sel{background:#FBF4D2}
+input[type=radio],input[type=checkbox]{width:18px;height:18px;accent-color:var(--ink);margin-top:2px;flex:none}
+.ck{display:flex;gap:10px;margin-bottom:10px;font-size:.88rem}
+.fld{display:grid;gap:4px;margin:12px 0}
+.fld label{font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.fld textarea{font:inherit;padding:9px 11px;border:1px solid var(--line);width:100%}
+.nav{display:flex;justify-content:space-between;gap:10px;margin:16px 0}
+.btn{font:inherit;font-weight:600;font-size:.85rem;padding:10px 16px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.btn:hover{background:var(--ink);color:#fff}
+.btn.main{background:var(--acc)}
+.btn.main:hover{background:var(--ink);color:var(--acc)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;background:transparent;color:var(--ink)}
+@media(max-width:620px){.steps{grid-template-columns:1fr 1fr}.steps li:nth-child(2) button{border-right:0}h1{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div><b>Imports Intelligence</b><span>Protótipo guiado · dados fictícios, nada é salvo</span></div>
+  <nav><a href="index.html">← Voltar ao site</a><a href="prototipo.html">Protótipo completo</a></nav>
+</header>
+<main class="wrap">
+  <h1>Do pedido à aprovação, em quatro passos</h1>
+  <p class="lead">Acompanhe um pedido de 80 t de soda cáustica. Escolha um cenário e avance pelos passos.</p>
+  <div class="sc" role="group" aria-label="Cenário">
+    <button type="button" data-sc="1" aria-pressed="true">Cenário 1 · Fluxo padrão</button>
+    <button type="button" data-sc="2" aria-pressed="false">Cenário 2 · Com intervenção</button>
+  </div>
+  <ol class="steps" id="steps"></ol>
+  <div id="app"></div>
+  <div class="nav" id="nav"></div>
+  <p class="hint">Valores ilustrativos. Os impostos usam alíquotas de exemplo; o cálculo oficial é do despachante e do contador.</p>
+</main>
+<script>
+const FX=5.4,LANE={CN:58,IN:72,AE:66,US:60},BRL=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+const S={
+ hen:{n:'Hengrui Alkali Co.',pais:'China',o:'CN',p:462,inc:'FOB',lt:38,q:80,fmt:'PDF',hist:86,esg:1},
+ mer:{n:'Meridian Chemicals Pvt.',pais:'Índia',o:'IN',p:489,inc:'CFR',lt:42,q:80,fmt:'Planilha Excel',hist:79,esg:0},
+ gul:{n:'Gulfstream Alkali FZE',pais:'Emirados Árabes',o:'AE',p:478,inc:'FOB',lt:30,q:80,fmt:'Texto do e-mail',hist:72,esg:0},
+ lon:{n:'Lone Star Chemicals Inc.',pais:'Estados Unidos',o:'US',p:505,inc:'FOB',lt:34,q:60,fmt:'PDF',hist:68,esg:0},
+ nor:{n:'Nordwerk Chemie GmbH',pais:'Alemanha',nr:1}};
+const SC={
+ 1:{ids:['hen','mer','gul'],exc:{}},
+ 2:{ids:['hen','mer','gul','lon','nor'],exc:{hen:['Incoterm ausente no PDF: assumido FOB, a confirmar'],lon:['Entrega parcial: 60 de 80 t','Validade da proposta não informada']}}};
+const STEPS=['Pedido','Cotações','Comparação','Aprovação'];
+let sc=1,step=0,pick=null,conf=new Set(),just='',done=false;
+const $=id=>document.getElementById(id),exc=id=>SC[sc].exc[id]||[];
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function calc(s){
+ const b=s.p*s.q,fr=LANE[s.o]*s.q,sg=b*.0025;
+ const cif=s.inc==='FOB'?b+fr+sg:s.inc==='CFR'?b+sg:b,fi=s.inc==='FOB'?fr+sg:s.inc==='CFR'?sg:0;
+ const va=cif*FX,ii=va*.04,ipi=(va+ii)*.05,pc=va*.1175,af=fr*FX*.25,dp=95*s.q;
+ const tot=(va+ii+ipi+pc+af+dp)/.82;
+ return{tot,base:b*FX,fi:fi*FX,rest:tot-b*FX-fi*FX,pt:tot/s.q};
+}
+function rank(){
+ const L=SC[sc].ids.filter(i=>!S[i].nr).map(i=>({id:i,s:S[i],c:calc(S[i])}));
+ const mc=Math.min(...L.map(x=>x.c.pt)),ml=Math.min(...L.map(x=>x.s.lt));
+ L.forEach(x=>x.n=Math.round(40*mc/x.c.pt+20*ml/x.s.lt+.2*x.s.hist+(x.s.esg?20:0)));
+ return L.sort((a,b)=>b.n-a.n);
+}
+
+const P0=()=>{const ids=SC[sc].ids;return `<section class="pn"><h2>Pedido de cotação</h2><div class="bd"><div class="kv"><div><small>Cliente</small>Indústria Alfa</div><div><small>Material</small>Soda cáustica em escamas (NCM 2815.11.00)</div><div><small>Quantidade</small>80 t</div><div><small>Destino</small>Porto de Paranaguá</div></div><p class="hint">O comprador cadastra o pedido em poucos minutos. O sistema envia o e-mail de cotação aos ${ids.length} fornecedores abaixo, sem digitação.</p></div></section><section class="pn"><h2>Fornecedores convidados</h2><div class="tw"><table class="t"><thead><tr><th>Fornecedor</th><th>País</th><th>Situação</th></tr></thead><tbody>${ids.map(i=>`<tr><td><b>${S[i].n}</b></td><td>${S[i].pais}</td><td><span class="ch wait">E-mail enviado</span></td></tr>`).join('')}</tbody></table></div></section>`};
+
+const P1=()=>`<section class="pn"><h2>Cotações recebidas e padronizadas</h2><div class="tw"><table class="t"><thead><tr><th>Fornecedor</th><th>Chegou como</th><th class="r">Preço (US$/t)</th><th>Incoterm</th><th class="r">Prazo</th><th>Situação</th></tr></thead><tbody>${SC[sc].ids.map(i=>{const s=S[i],e=exc(i);return s.nr?`<tr><td><b>${s.n}</b></td><td colspan="4">Sem resposta</td><td><span class="ch wait">Cobrança enviada</span><small class="sub">Lembrete automático após 12 h</small></td></tr>`:`<tr><td><b>${s.n}</b></td><td>${s.fmt}</td><td class="r">${s.p}</td><td>${s.inc}</td><td class="r">${s.lt} d</td><td>${e.length?`<span class="ch warn">Revisar</span>${e.map(x=>`<small class="sub bad">${x}</small>`).join('')}`:'<span class="ch ok">Lida</span>'}</td></tr>`}).join('')}</tbody></table></div><p class="hint pad">Cada fornecedor responde de um jeito. O sistema lê PDF, planilha e texto, coloca tudo no mesmo formato e marca o que está incompleto.</p></section>`;
+
+const P2=()=>{const L=rank(),pm=L.reduce((a,b)=>b.s.p<a.s.p?b:a),cm=L.reduce((a,b)=>b.c.pt<a.c.pt?b:a),top=L[0];
+return `<section class="pn"><h2>Comparação pelo custo total</h2><div class="tw"><table class="t"><thead><tr><th>Fornecedor</th><th class="r">Custo total</th><th class="r">Por tonelada</th><th class="r">Prazo</th><th>Composição</th><th class="r">Nota</th></tr></thead><tbody>${L.map((x,k)=>`<tr${k?'':' class="win"'}><td><b>${x.s.n}</b>${k?'':'<small class="sub">Sugerido pela nota</small>'}</td><td class="r">${BRL.format(x.c.tot)}</td><td class="r">${BRL.format(x.c.pt)}</td><td class="r">${x.s.lt} d</td><td><div class="cb"><i style="width:${x.c.base/x.c.tot*100}%;background:#5E7A8C"></i><i style="width:${x.c.fi/x.c.tot*100}%;background:#9FB3C0"></i><i style="width:${x.c.rest/x.c.tot*100}%;background:var(--acc)"></i></div></td><td class="r"><b>${x.n}</b></td></tr>`).join('')}</tbody></table></div><div class="leg"><span><i style="background:#5E7A8C"></i>Produto</span><span><i style="background:#9FB3C0"></i>Frete e seguro</span><span><i style="background:var(--acc)"></i>Impostos e despesas</span></div></section><div class="verdict"><b>Menor preço de tabela:</b> ${pm.s.n}. <b>Menor custo total:</b> ${cm.s.n}. <b>Sugerido pela nota:</b> ${top.s.n}.<span>A nota (0 a 100) pesa custo total 40%, prazo 20%, histórico 20% e selo ESG 20%. É uma sugestão: quem decide é a pessoa.</span></div>`};
+
+const P3=()=>{const L=rank(),top=L[0];if(pick===null)pick=top.id;
+const sel=L.find(x=>x.id===pick),e=exc(pick),dif=pick!==top.id;
+if(done)return `<div class="okb"><b>Compra aprovada.</b> ${sel.s.n} · ${BRL.format(sel.c.tot)} (${BRL.format(sel.c.pt)} por tonelada).<small class="sub">Registro de auditoria: decisão aprovada pelo comprador${dif?'; fornecedor diferente do sugerido. Justificativa: “'+esc(just)+'”':'; fornecedor sugerido pelo sistema'}${e.length?'; '+e.length+' exceção(ões) confirmada(s)':''}.</small></div>`;
+return `<section class="pn"><h2>Revisão humana</h2><div>${L.map(x=>`<label class="opt${x.id===pick?' sel':''}"><input type="radio" name="f" value="${x.id}"${x.id===pick?' checked':''}><span><b>${x.s.n}</b> · ${BRL.format(x.c.tot)} · nota ${x.n}${x.id===top.id?' <span class="ch ok">Sugerido</span>':''}${exc(x.id).map(t=>`<small class="sub bad">${t}</small>`).join('')}</span></label>`).join('')}</div><div class="bd">${e.map((t,i)=>`<label class="ck"><input type="checkbox" data-ck="${i}"${conf.has(i)?' checked':''}>Confirmo a exceção: ${t}</label>`).join('')}${dif?`<div class="fld"><label for="j">Justificativa (obrigatória para escolher outro fornecedor)</label><textarea id="j" rows="3">${esc(just)}</textarea></div>`:''}<button class="btn main" id="ap" type="button">Aprovar compra</button></div></section>`};
+
+function upd(){const b=$('ap');if(!b)return;const top=rank()[0].id,e=exc(pick);b.disabled=!(conf.size===e.length&&(pick===top||just.trim().length>=10))}
+function draw(){
+ step=Math.max(0,Math.min(3,step));
+ $('steps').innerHTML=STEPS.map((t,i)=>`<li><button type="button" data-st="${i}" class="${i===step?'cur':i<step?'dn':''}"${i===step?' aria-current="step"':''}><small>PASSO ${i+1}</small><b>${t}</b></button></li>`).join('');
+ $('app').innerHTML=[P0,P1,P2,P3][step]();
+ $('nav').innerHTML=`<button class="btn" id="back" type="button"${step?'':' disabled'}>← Voltar</button>`+(step<3?`<button class="btn main" id="next" type="button">Avançar →</button>`:done?`<button class="btn" id="rs" type="button">Reiniciar cenário</button>`:'');
+ upd();
+}
+function reset(){step=0;pick=null;conf=new Set();just='';done=false;draw()}
+
+document.addEventListener('click',ev=>{
+ const t=ev.target.closest('button');if(!t)return;
+ if(t.dataset.sc){sc=+t.dataset.sc;document.querySelectorAll('.sc button').forEach(b=>b.setAttribute('aria-pressed',b===t));reset()}
+ else if(t.dataset.st){step=+t.dataset.st;draw()}
+ else if(t.id==='back'){step--;draw()}
+ else if(t.id==='next'){step++;draw()}
+ else if(t.id==='ap'){done=true;draw()}
+ else if(t.id==='rs')reset();
+});
+document.addEventListener('change',ev=>{
+ const t=ev.target;
+ if(t.name==='f'){pick=t.value;conf=new Set();draw()}
+ else if(t.dataset.ck!==undefined){t.checked?conf.add(+t.dataset.ck):conf.delete(+t.dataset.ck);upd()}
+});
+document.addEventListener('input',ev=>{if(ev.target.id==='j'){just=ev.target.value;upd()}});
+draw();
+</script>
+</body>
+</html>

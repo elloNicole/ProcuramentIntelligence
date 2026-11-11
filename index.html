@@ -52,11 +52,12 @@
     <nav aria-label="Principal">
       <ul class="menu" id="menu">
         <li><a href="#fluxo">Fluxo</a></li>
-        <li><a href="prototipo.html">Protótipo</a></li>
+        <li><a href="prototipo-simples.html">Protótipo</a></li>
         <li><a href="simulador.html">Simulador</a></li>
         <li><a href="#erp">ERP</a></li>
         <li><a href="#reforma">Reforma</a></li>
         <li><a href="#evidencias">Evidências</a></li>
+        <li><a href="#diagramas">Diagramas</a></li>
         <li><a href="#projeto">Projeto</a></li>
       </ul>
     </nav>
@@ -72,7 +73,7 @@
     <h1 id="h-hero" style="margin-top:0">Nova geração do <em>Comércio Exterior.</em> <span class="l2">O futuro chegou.</span></h1>
     <div class="hero-sub">
       <p>Inteligência artificial que lê suas cotações, calcula o custo total de importação e entrega tudo ao seu ERP.</p>
-      <div class="cta"><a class="btn main" href="prototipo.html">Ver protótipo →</a><a class="btn on-dark" href="#acesso">Acesso beta</a></div>
+      <div class="cta"><a class="btn main" href="prototipo-simples.html">Ver protótipo →</a><a class="btn on-dark" href="#acesso">Acesso beta</a></div>
     </div>
 
     <div class="console" role="img" aria-label="Exemplo ilustrativo: três fornecedores comparados por custo total. O Fornecedor B tem o maior preço FOB e o menor custo total.">
@@ -141,7 +142,7 @@
       <div class="verdict" id="verdict" role="status"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><span id="verdict-txt"></span></div>
     </div>
     <p class="note">Simulação simplificada: alíquota única sobre o valor CIF (preço + frete + seguro). O cálculo oficial é do despachante e do contador.</p>
-    <p class="note" style="margin-top:12px"><a href="prototipo.html" style="font-weight:600">Abrir o protótipo completo →</a> &nbsp; <a href="simulador.html" style="font-weight:600">Abrir o simulador de custos e impostos →</a></p>
+    <p class="note" style="margin-top:12px"><a href="prototipo-simples.html" style="font-weight:600">Abrir o protótipo passo a passo →</a> &nbsp; <a href="prototipo.html" style="font-weight:600">Abrir o protótipo completo →</a> &nbsp; <a href="simulador.html" style="font-weight:600">Abrir o simulador de custos e impostos →</a></p>
   </div>
 </section>
 
@@ -226,9 +227,36 @@
   </div>
 </section>
 
+<section id="diagramas" aria-labelledby="h-diag">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="tag">06 / Diagramas</span><span></span><h2 id="h-diag">Quem faz o quê, <em>e como os dados se ligam.</em></h2></div>
+    <p class="note dg-hint">Deslize para o lado ou abra o diagrama em tela cheia.</p>
+
+    <figure class="dg rv">
+      <div class="tw">
+        <object class="dg-fig" type="image/svg+xml" data="assets/imagens/diagrama-caso-de-uso.svg" role="img" aria-label="Diagrama de casos de uso: Comprador, Gestor e Fornecedor e as oito funções do sistema"><img src="assets/imagens/diagrama-caso-de-uso.svg" alt="Diagrama de casos de uso: Comprador, Gestor e Fornecedor e as oito funções do sistema"></object>
+      </div>
+      <figcaption>
+        <p class="dg-cap"><b>Casos de uso.</b> A linha mostra quem participa de cada função, não quem a inicia. O fornecedor não usa o sistema: recebe o pedido e responde por e-mail. Preto indica etapa automática, branco indica ação de uma pessoa e amarelo indica a decisão humana antes do registro.</p>
+        <a class="btn sm" href="assets/imagens/diagrama-caso-de-uso.svg" target="_blank" rel="noopener">Tela cheia →</a>
+      </figcaption>
+    </figure>
+
+    <figure class="dg rv">
+      <div class="tw">
+        <object class="dg-fig er" type="image/svg+xml" data="assets/imagens/diagrama-relacionamento.svg" role="img" aria-label="Diagrama de relacionamento: requisição, item solicitado, material, fornecedor, cotação, cálculo de custo e revisão humana"><img src="assets/imagens/diagrama-relacionamento.svg" alt="Diagrama de relacionamento: requisição, item solicitado, material, fornecedor, cotação, cálculo de custo e revisão humana"></object>
+      </div>
+      <figcaption>
+        <p class="dg-cap"><b>Relacionamento.</b> Uma requisição contém itens, cada item recebe cotações de fornecedores diferentes e cada cotação gera um cálculo de custo. A requisição passa por revisão humana. Modelo simplificado e em proposta; a versão completa está na <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/arquitetura.md">documentação de arquitetura</a>.</p>
+        <a class="btn sm" href="assets/imagens/diagrama-relacionamento.svg" target="_blank" rel="noopener">Tela cheia →</a>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
 <section id="projeto" aria-labelledby="h-proj">
   <div class="wrap">
-    <div class="sec-head rv"><span class="tag">06 / Projeto</span><span></span><h2 id="h-proj">Sobre o <em>projeto.</em></h2></div>
+    <div class="sec-head rv"><span class="tag">07 / Projeto</span><span></span><h2 id="h-proj">Sobre o <em>projeto.</em></h2></div>
 
     <div class="pj rv">
       <div class="pl"><span class="tag">Apresentação</span></div>
@@ -236,7 +264,7 @@
         <h3>Imports Intelligence</h3>
         <p>Sistema que automatiza a gestão de cotações, importações e seleção de fornecedores com inteligência artificial, para pequenas e médias empresas importadoras.</p>
         <p class="meta">Projeto Interdisciplinar 1 · Curso de Gestão da Tecnologia da Informação · IFPR Câmpus Pinhais · 4º período · 2026.02</p>
-        <div class="links"><a href="https://github.com/elloNicole/ProcuramentIntelligence">Repositório</a><a href="https://github.com/elloNicole/ProcuramentIntelligence/tree/main/docs">Documentação</a><a href="prototipo.html">Demonstração</a></div>
+        <div class="links"><a href="https://github.com/elloNicole/ProcuramentIntelligence">Repositório</a><a href="https://github.com/elloNicole/ProcuramentIntelligence/tree/main/docs">Documentação</a><a href="prototipo-simples.html">Demonstração</a></div>
       </div>
     </div>
 
@@ -295,7 +323,7 @@
           <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/arquitetura.md"><b>Arquitetura</b><span>Fluxo, componentes, modelo de dados e decisões técnicas</span></a>
           <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/instalacao.md"><b>Instalação e execução</b><span>Como abrir o site e a demo; pré-requisitos do sistema</span></a>
           <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/funcionalidades.md"><b>Funcionalidades</b><span>Processos do sistema em detalhe: entradas, regras, saídas e estado</span></a>
-          <a href="prototipo.html"><b>Protótipo navegável</b><span>Painel, pedido com cotações e revisão humana</span></a>
+          <a href="prototipo-simples.html"><b>Protótipo passo a passo</b><span>Do pedido à aprovação, com dois cenários</span></a>
           <a href="https://github.com/elloNicole/ProcuramentIntelligence/blob/main/docs/cronograma.md"><b>Gestão e evolução</b><span>Etapas, decisões, limitações e melhorias planejadas</span></a>
         </div>
       </div>
@@ -338,7 +366,7 @@
   <div class="wrap">
     <div class="two rv">
       <div>
-        <span class="tag" style="color:var(--acc)">07 / Acesso beta</span>
+        <span class="tag" style="color:var(--acc)">08 / Acesso beta</span>
         <h2 id="h-acc" style="margin-top:14px">Entre na <em>lista beta.</em></h2>
         <p class="lead">Conte como suas cotações chegam hoje. Retornamos com um diagnóstico.</p>
         <div id="faq">
@@ -371,7 +399,7 @@
         <a class="brand" href="#">Imports Intelligence</a>
         <p style="margin-top:14px;max-width:40ch">IA para o Comércio Exterior: cotações, custo total e seleção de fornecedores, integrados ao ERP.</p>
       </div>
-      <ul><li><a href="#fluxo">Fluxo</a></li><li><a href="prototipo.html">Protótipo</a></li><li><a href="simulador.html">Simulador</a></li><li><a href="#projeto">Sobre o projeto</a></li><li><a href="#reforma">Reforma tributária</a></li><li><a href="https://github.com/elloNicole/ProcuramentIntelligence">GitHub</a></li></ul>
+      <ul><li><a href="#fluxo">Fluxo</a></li><li><a href="prototipo-simples.html">Protótipo</a></li><li><a href="simulador.html">Simulador</a></li><li><a href="#diagramas">Diagramas</a></li><li><a href="#projeto">Sobre o projeto</a></li><li><a href="#reforma">Reforma tributária</a></li><li><a href="https://github.com/elloNicole/ProcuramentIntelligence">GitHub</a></li></ul>
     </div>
     <div class="refs">
       <h3>Referências</h3>
