@@ -431,3 +431,17 @@ h1{font-size:clamp(2.6rem,min(8.4vw,13vh + 3vw),7.4rem)}
 @media(max-width:340px){h1{font-size:2.4rem}.crow{grid-template-columns:1fr auto}.brand{font-size:.85rem}}
 @media(max-height:520px) and (orientation:landscape){.hero{padding-top:36px}h1{font-size:clamp(2.2rem,9vh,4rem)}.menu{max-height:calc(100vh - 64px);overflow:auto}}
 @media(hover:none){.btn:hover{background:inherit;color:inherit}.btn.main:hover{background:var(--acc);border-color:var(--acc)}}
+
+/* diagramas */
+.dg{margin:0 0 40px}
+.dg:last-of-type{margin-bottom:0}
+.dg-fig{display:block;width:100%;min-width:720px;aspect-ratio:960/616;border:0}
+.dg-fig.er{aspect-ratio:960/600}
+.dg-fig img{width:100%;height:auto}
+.dg figcaption{display:flex;gap:16px 32px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;margin-top:16px}
+.dg-cap{font-size:.92rem;color:var(--mut);max-width:72ch}
+.dg-cap b{color:var(--ink);font-weight:600}
+.dg-cap a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink)}
+.dg figcaption .btn{flex:none}
+.dg-hint{display:none}
+@media(max-width:820px){.dg-hint{display:block;margin:-20px 0 22px}.dg .tw{border:1px solid var(--line)}}
